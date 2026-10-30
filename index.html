@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evolution of Programming Languages</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .graph-wrap {
+      position: relative;
+      margin: 40px 0 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .graph-wrap svg {
+      display: block;
+      width: 100%;
+      min-width: 600px;
+      height: auto;
+    }
+    .graph-legend {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin: 32px 0 8px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+    .legend-dot {
+      width: 12px; height: 12px;
+      border-radius: 2px;
+      border: 1.5px solid;
+    }
+    .legend-dot.systems    { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 15%, transparent); }
+    .legend-dot.oop        { border-color: var(--blue);   background: color-mix(in srgb, var(--blue) 15%, transparent); }
+    .legend-dot.functional { border-color: var(--green);  background: color-mix(in srgb, var(--green) 15%, transparent); }
+    .legend-dot.scripting  { border-color: var(--orange); background: color-mix(in srgb, var(--orange) 15%, transparent); }
+    .legend-dot.other      { border-color: var(--purple); background: color-mix(in srgb, var(--purple) 15%, transparent); }
+    .graph-hint {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-light);
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+    /* SVG styles */
+    .decade-line { stroke: var(--border-light); stroke-width: 1; stroke-dasharray: 4 4; }
+    .decade-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      fill: var(--text-light);
+      letter-spacing: 1px;
+    }
+    .edge { fill: none; stroke: var(--border); stroke-width: 1.2; opacity: 0.45; }
+    .edge.highlighted { stroke: var(--accent); stroke-width: 2; opacity: 0.85; }
+    .edge.dimmed { opacity: 0.08; }
+    .node rect {
+      stroke-width: 1.5;
+      rx: 3; ry: 3;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .node text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 500;
+      fill: var(--text);
+      pointer-events: none;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+    .node.systems rect    { stroke: var(--accent); fill: color-mix(in srgb, var(--accent) 8%, var(--bg)); }
+    .node.oop rect        { stroke: var(--blue);   fill: color-mix(in srgb, var(--blue) 8%, var(--bg)); }
+    .node.functional rect { stroke: var(--green);  fill: color-mix(in srgb, var(--green) 8%, var(--bg)); }
+    .node.scripting rect  { stroke: var(--orange); fill: color-mix(in srgb, var(--orange) 8%, var(--bg)); }
+    .node.other rect      { stroke: var(--purple); fill: color-mix(in srgb, var(--purple) 8%, var(--bg)); }
+    .node.highlighted rect { stroke-width: 2.5; filter: drop-shadow(0 1px 4px rgba(0,0,0,0.15)); }
+    .node.dimmed rect { opacity: 0.25; }
+    .node.dimmed text { opacity: 0.25; }
+    .graph-tooltip {
+      position: fixed;
+      background: var(--bg-code);
+      color: #D4CFCA;
+      font-family: 'Source Serif 4', serif;
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 12px 16px;
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+      z-index: 2000;
+      max-width: 280px;
+    }
+    .graph-tooltip.visible { opacity: 1; }
+    .graph-tooltip .tt-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #fff;
+    }
+    .graph-tooltip .tt-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #D4896A;
+      letter-spacing: 1px;
+      margin-left: 8px;
+    }
+    .graph-tooltip .tt-creator {
+      font-size: 13px;
+      color: #9A938C;
+      margin-top: 4px;
+    }
+    .graph-tooltip .tt-note {
+      font-size: 13px;
+      font-style: italic;
+      color: #B0A89E;
+      margin-top: 2px;
+    }
+  </style>
+  <script>
+    const saved = localStorage.getItem('dp-theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+    else if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+      document.documentElement.setAttribute('data-theme', 'dark');
+  </script>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">Evolution of Programming</a>
+      <div class="nav-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="title-page">
+    <p class="edition">A Visual History</p>
+    <h1>Evolution of<br><em>Programming</em></h1>
+    <p class="subtitle">Ancestors, Descendants &amp; Influence</p>
+    <span class="language-badge">1957 &mdash; Present</span>
+  </header>
+
+  <div class="container">
+
+    <section class="preface">
+      <h2>Preface</h2>
+      <p>No programming language is created in isolation. Every language carries the DNA of those that came before it&mdash;borrowing a type system here, a concurrency model there, a syntax philosophy from somewhere else entirely.</p>
+      <p>This graph traces those lines of influence across seven decades, from Fortran's first compilation in 1957 to Zig's pursuit of simplicity today. Hover over any language to illuminate its ancestry and legacy.</p>
+    </section>
+
+    <div class="graph-legend">
+      <div class="legend-item"><span class="legend-dot systems"></span>Systems</div>
+      <div class="legend-item"><span class="legend-dot oop"></span>Object-Oriented</div>
+      <div class="legend-item"><span class="legend-dot functional"></span>Functional</div>
+      <div class="legend-item"><span class="legend-dot scripting"></span>Scripting</div>
+      <div class="legend-item"><span class="legend-dot other"></span>Other</div>
+    </div>
+
+    <p class="graph-hint">Hover over a language to trace its lineage</p>
+
+    <div class="graph-wrap">
+      <svg id="langGraph" viewBox="0 0 900 1920" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+
+    <footer>
+      <p>Evolution of Programming Languages &mdash; A Visual History</p>
+    </footer>
+  </div>
+
+  <div class="graph-tooltip" id="tooltip">
+    <span class="tt-name" id="ttName"></span>
+    <span class="tt-year" id="ttYear"></span>
+    <div class="tt-creator" id="ttCreator"></div>
+    <div class="tt-note" id="ttNote"></div>
+  </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
+
+  <script>
+  (function() {
+    var NW = 74, NH = 26, NR = 3;
+    var Y0 = 60, PX = 30;
+    function yy(year) { return Y0 + (year - 1957) * PX; }
+
+    var LANGS = [
+      { id:'fortran',    name:'Fortran',     year:1957, x:100,  cat:'systems',    by:[], creator:'John Backus, IBM', note:'First high-level compiled language' },
+      { id:'lisp',       name:'Lisp',        year:1958, x:700,  cat:'functional', by:[], creator:'John McCarthy, MIT', note:'Garbage collection, recursion, homoiconicity' },
+      { id:'cobol',      name:'COBOL',       year:1959, x:420,  cat:'other',      by:[], creator:'Grace Hopper et al.', note:'English-like syntax for business' },
+      { id:'algol',      name:'ALGOL',       year:1960, x:240,  cat:'systems',    by:['fortran'], creator:'International committee', note:'Influenced nearly every language after it' },
+      { id:'basic',      name:'BASIC',       year:1964, x:420,  cat:'scripting',  by:['algol'], creator:'Kemeny & Kurtz', note:'Democratized access to computing' },
+      { id:'simula',     name:'Simula',      year:1967, x:340,  cat:'oop',        by:['algol'], creator:'Dahl & Nygaard', note:'Invented classes and OOP' },
+      { id:'pascal',     name:'Pascal',      year:1970, x:200,  cat:'systems',    by:['algol'], creator:'Niklaus Wirth', note:'Structured programming, CS education' },
+      { id:'c',          name:'C',           year:1972, x:100,  cat:'systems',    by:['algol'], creator:'Dennis Ritchie', note:'Systems programming, built Unix' },
+      { id:'smalltalk',  name:'Smalltalk',   year:1972, x:420,  cat:'oop',        by:['simula','lisp'], creator:'Alan Kay, Xerox PARC', note:'Pure OOP, message passing, GUI' },
+      { id:'prolog',     name:'Prolog',      year:1972, x:800,  cat:'other',      by:[], creator:'Colmerauer & Roussel', note:'Logic programming, AI research' },
+      { id:'ml',         name:'ML',          year:1973, x:620,  cat:'functional', by:['lisp'], creator:'Robin Milner', note:'Type inference, pattern matching' },
+      { id:'sql',        name:'SQL',         year:1974, x:800,  cat:'other',      by:[], creator:'Chamberlin & Boyce', note:'Declarative data querying' },
+      { id:'scheme',     name:'Scheme',      year:1975, x:560,  cat:'functional', by:['lisp'], creator:'Sussman & Steele', note:'Minimalist Lisp, lexical closures' },
+      { id:'ada',        name:'Ada',         year:1983, x:260,  cat:'systems',    by:['pascal','simula'], creator:'Jean Ichbiah', note:'Safety-critical systems, tasking' },
+      { id:'objc',       name:'Obj-C',       year:1984, x:420,  cat:'oop',        by:['c','smalltalk'], creator:'Brad Cox', note:'Smalltalk messaging meets C' },
+      { id:'cpp',        name:'C++',         year:1985, x:160,  cat:'systems',    by:['c','simula'], creator:'Bjarne Stroustrup', note:'C with classes, templates, RAII' },
+      { id:'erlang',     name:'Erlang',      year:1986, x:760,  cat:'functional', by:['prolog'], creator:'Joe Armstrong', note:'Fault-tolerant concurrency' },
+      { id:'perl',       name:'Perl',        year:1987, x:500,  cat:'scripting',  by:['c'], creator:'Larry Wall', note:'Text processing, regex' },
+      { id:'haskell',    name:'Haskell',     year:1990, x:640,  cat:'functional', by:['ml','scheme'], creator:'Haskell Committee', note:'Pure functional, lazy evaluation' },
+      { id:'python',     name:'Python',      year:1991, x:460,  cat:'scripting',  by:['c','perl'], creator:'Guido van Rossum', note:'Readability, batteries included' },
+      { id:'vb',         name:'VB',          year:1991, x:340,  cat:'scripting',  by:['basic'], creator:'Microsoft', note:'Rapid application development' },
+      { id:'lua',        name:'Lua',         year:1993, x:560,  cat:'scripting',  by:['scheme'], creator:'PUC-Rio team', note:'Embeddable scripting, game engines' },
+      { id:'r',          name:'R',           year:1993, x:780,  cat:'scripting',  by:['scheme'], creator:'Ihaka & Gentleman', note:'Statistical computing and graphics' },
+      { id:'java',       name:'Java',        year:1995, x:200,  cat:'oop',        by:['cpp','smalltalk'], creator:'James Gosling, Sun', note:'Write once, run anywhere' },
+      { id:'ruby',       name:'Ruby',        year:1995, x:540,  cat:'scripting',  by:['perl','smalltalk'], creator:'Yukihiro Matsumoto', note:'Optimized for happiness' },
+      { id:'javascript', name:'JavaScript',  year:1995, x:420,  cat:'scripting',  by:['scheme','java'], creator:'Brendan Eich', note:'The language of the web' },
+      { id:'php',        name:'PHP',         year:1995, x:330,  cat:'scripting',  by:['c','perl'], creator:'Rasmus Lerdorf', note:'Server-side web' },
+      { id:'ocaml',      name:'OCaml',       year:1996, x:680,  cat:'functional', by:['ml'], creator:'INRIA', note:'ML family, pattern matching' },
+      { id:'csharp',     name:'C#',          year:2000, x:260,  cat:'oop',        by:['java','cpp'], creator:'Anders Hejlsberg', note:'The .NET platform' },
+      { id:'d',          name:'D',           year:2001, x:120,  cat:'systems',    by:['cpp'], creator:'Walter Bright', note:'A better C++' },
+      { id:'groovy',     name:'Groovy',      year:2003, x:420,  cat:'scripting',  by:['java','ruby'], creator:'James Strachan', note:'Dynamic JVM, Gradle' },
+      { id:'scala',      name:'Scala',       year:2003, x:580,  cat:'functional', by:['java','haskell'], creator:'Martin Odersky', note:'OOP + functional on JVM' },
+      { id:'fsharp',     name:'F#',          year:2005, x:680,  cat:'functional', by:['ocaml','csharp'], creator:'Don Syme', note:'ML on .NET' },
+      { id:'clojure',    name:'Clojure',     year:2007, x:620,  cat:'functional', by:['lisp','java'], creator:'Rich Hickey', note:'Modern Lisp, immutable data' },
+      { id:'go',         name:'Go',          year:2009, x:120,  cat:'systems',    by:['c','pascal'], creator:'Pike, Thompson & Griesemer', note:'Simplicity, goroutines' },
+      { id:'rust',       name:'Rust',        year:2010, x:220,  cat:'systems',    by:['cpp','haskell','ocaml','erlang'], creator:'Graydon Hoare', note:'Memory safety without GC' },
+      { id:'kotlin',     name:'Kotlin',      year:2011, x:320,  cat:'oop',        by:['java','scala'], creator:'JetBrains', note:'Modern Java alternative' },
+      { id:'dart',       name:'Dart',        year:2011, x:430,  cat:'oop',        by:['java','javascript'], creator:'Google', note:'Flutter, null safety' },
+      { id:'elixir',     name:'Elixir',      year:2011, x:760,  cat:'functional', by:['erlang','ruby'], creator:'Jos\u00e9 Valim', note:'Erlang VM, Ruby syntax' },
+      { id:'typescript',name:'TypeScript',   year:2012, x:470,  cat:'scripting',  by:['javascript','csharp'], creator:'Anders Hejlsberg', note:'Typed superset of JS' },
+      { id:'julia',      name:'Julia',       year:2012, x:640,  cat:'functional', by:['python','lisp'], creator:'Bezanson et al.', note:'High-performance scientific' },
+      { id:'swift',      name:'Swift',       year:2014, x:380,  cat:'oop',        by:['objc','rust'], creator:'Chris Lattner, Apple', note:'Safe, fast Apple platform' },
+      { id:'zig',        name:'Zig',         year:2016, x:120,  cat:'systems',    by:['c','rust'], creator:'Andrew Kelley', note:'Simple systems, no hidden allocs' },
+    ];
+
+    // Build lookup and y positions
+    var byId = {};
+    LANGS.forEach(function(l) { l.y = yy(l.year); byId[l.id] = l; });
+
+    // Build descendants map
+    var desc = {};
+    LANGS.forEach(function(l) { desc[l.id] = []; });
+    LANGS.forEach(function(l) {
+      l.by.forEach(function(pid) {
+        if (desc[pid]) desc[pid].push(l.id);
+      });
+    });
+
+    // Trace all ancestors
+    function getAncestors(id, visited) {
+      visited = visited || new Set();
+      if (visited.has(id)) return visited;
+      visited.add(id);
+      var lang = byId[id];
+      if (lang) lang.by.forEach(function(pid) { getAncestors(pid, visited); });
+      return visited;
+    }
+
+    // Trace all descendants
+    function getDescendants(id, visited) {
+      visited = visited || new Set();
+      if (visited.has(id)) return visited;
+      visited.add(id);
+      (desc[id] || []).forEach(function(cid) { getDescendants(cid, visited); });
+      return visited;
+    }
+
+    var svg = document.getElementById('langGraph');
+    var NS = 'http://www.w3.org/2000/svg';
+    var tooltip = document.getElementById('tooltip');
+    var ttName = document.getElementById('ttName');
+    var ttYear = document.getElementById('ttYear');
+    var ttCreator = document.getElementById('ttCreator');
+    var ttNote = document.getElementById('ttNote');
+
+    function makeEl(tag, attrs, parent) {
+      var e = document.createElementNS(NS, tag);
+      if (attrs) Object.keys(attrs).forEach(function(k) { e.setAttribute(k, attrs[k]); });
+      if (parent) parent.appendChild(e);
+      return e;
+    }
+
+    // Decade markers
+    var decades = [1960, 1970, 1980, 1990, 2000, 2010];
+    var decadeG = makeEl('g', {class:'decades'}, svg);
+    decades.forEach(function(yr) {
+      var y = yy(yr);
+      makeEl('line', {x1:45, x2:880, y1:y, y2:y, class:'decade-line'}, decadeG);
+      var txt = makeEl('text', {x:20, y:y+4, class:'decade-label'}, decadeG);
+      txt.textContent = yr + 's';
+    });
+
+    // Edges
+    var edgeG = makeEl('g', {class:'edges'}, svg);
+    var edgeEls = [];
+    LANGS.forEach(function(lang) {
+      var cx2 = lang.x + NW/2, cy2 = lang.y;
+      lang.by.forEach(function(pid) {
+        var p = byId[pid];
+        if (!p) return;
+        var cx1 = p.x + NW/2, cy1 = p.y + NH;
+        var dy = cy2 - cy1;
+        var d = 'M'+cx1+','+cy1+' C'+cx1+','+(cy1+dy*0.4)+' '+cx2+','+(cy2-dy*0.4)+' '+cx2+','+cy2;
+        var path = makeEl('path', {d:d, class:'edge', 'data-from':pid, 'data-to':lang.id}, edgeG);
+        edgeEls.push(path);
+      });
+    });
+
+    // Nodes
+    var nodeG = makeEl('g', {class:'nodes'}, svg);
+    var nodeEls = {};
+    LANGS.forEach(function(lang) {
+      var g = makeEl('g', {class:'node ' + lang.cat, 'data-id':lang.id, transform:'translate('+lang.x+','+lang.y+')'}, nodeG);
+      makeEl('rect', {width:NW, height:NH, rx:NR, ry:NR}, g);
+      var t = makeEl('text', {x:NW/2, y:NH/2}, g);
+      t.textContent = lang.name;
+      nodeEls[lang.id] = g;
+
+      g.addEventListener('mouseenter', function(ev) {
+        var anc = getAncestors(lang.id);
+        var des = getDescendants(lang.id);
+        var related = new Set();
+        anc.forEach(function(v) { related.add(v); });
+        des.forEach(function(v) { related.add(v); });
+
+        LANGS.forEach(function(l) {
+          var n = nodeEls[l.id];
+          if (related.has(l.id)) {
+            n.classList.add('highlighted');
+            n.classList.remove('dimmed');
+          } else {
+            n.classList.remove('highlighted');
+            n.classList.add('dimmed');
+          }
+        });
+
+        edgeEls.forEach(function(e) {
+          var from = e.getAttribute('data-from');
+          var to = e.getAttribute('data-to');
+          if (related.has(from) && related.has(to)) {
+            e.classList.add('highlighted');
+            e.classList.remove('dimmed');
+          } else {
+            e.classList.remove('highlighted');
+            e.classList.add('dimmed');
+          }
+        });
+
+        // Tooltip — safe DOM methods
+        ttName.textContent = lang.name;
+        ttYear.textContent = lang.year;
+        ttCreator.textContent = lang.creator;
+        ttNote.textContent = lang.note;
+        tooltip.classList.add('visible');
+        positionTooltip(ev);
+      });
+
+      g.addEventListener('mousemove', positionTooltip);
+
+      g.addEventListener('mouseleave', function() {
+        LANGS.forEach(function(l) {
+          nodeEls[l.id].classList.remove('highlighted', 'dimmed');
+        });
+        edgeEls.forEach(function(e) { e.classList.remove('highlighted', 'dimmed'); });
+        tooltip.classList.remove('visible');
+      });
+    });
+
+    function positionTooltip(ev) {
+      var pad = 16;
+      var x = ev.clientX + pad;
+      var y = ev.clientY + pad;
+      if (x + 280 > window.innerWidth) x = ev.clientX - 280 - pad;
+      if (y + 120 > window.innerHeight) y = ev.clientY - 120;
+      tooltip.style.left = x + 'px';
+      tooltip.style.top = y + 'px';
+    }
+  })();
+
+  // Theme toggle & back-to-top
+  document.getElementById('themeToggle').addEventListener('click', function() {
+    var html = document.documentElement;
+    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('dp-theme', next);
+  });
+  var btn = document.getElementById('backToTop');
+  window.addEventListener('scroll', function() { btn.classList.toggle('visible', window.scrollY > 600); });
+  btn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  </script>
+</body>
+</html>
