@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello, World! in Obj-C</title>
+  <meta name="description" content="Hello, World! in Obj-C (1984), with its place in the family tree of programming languages.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="hello.css">
+  <script>
+    const saved = localStorage.getItem('dp-theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+    else if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+      document.documentElement.setAttribute('data-theme', 'dark');
+  </script>
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">Evolution of Programming</a>
+      <div class="nav-right">
+        <a href="../index.html#objc" class="nav-link">Family tree</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="title-page hw-title">
+    <p class="edition">Hello, World!</p>
+    <h1>Obj-C</h1>
+    <p class="subtitle">Brad Cox</p>
+    <span class="language-badge hw-cat-oop">1984 &middot; Object-Oriented</span>
+  </header>
+
+  <main class="container">
+    <p class="hw-note">Smalltalk messaging meets C</p>
+
+    <pre><code class="language-objectivec">#import &lt;Foundation/Foundation.h&gt;
+
+int main() {
+    @autoreleasepool {
+        NSLog(@&quot;Hello, World!&quot;);
+    }
+    return 0;
+}</code></pre>
+    <p class="hw-run">Runs as shown: checked 2026-10-31 with <code>clang objc.m -fobjc-runtime=gcc -I$(gcc -print-file-name=include) $(gnustep-config --objc-flags) $(gnustep-config --base-libs) -o objc &amp;&amp; ./objc</code> in <code>debian:bookworm + apt</code>.</p>
+
+    <p class="hw-edition">This is the core version: Hello, World! as you would write it in Obj-C
+      today. A historical version, as it was first written, may follow.</p>
+
+    <section class="hw-lineage" aria-label="Lineage">
+      <div>
+        <h2>Descended from</h2>
+        <div class="hw-chips"><a class="hw-chip hw-cat-systems" href="c.html">C <span>1972</span></a><a class="hw-chip hw-cat-oop" href="smalltalk.html">Smalltalk <span>1972</span></a></div>
+      </div>
+      <div>
+        <h2>Influenced</h2>
+        <div class="hw-chips"><a class="hw-chip hw-cat-oop" href="swift.html">Swift <span>2014</span></a></div>
+      </div>
+    </section>
+
+    <nav class="hw-pager" aria-label="Chronological">
+      <a class="hw-prev" rel="prev" href="ada.html"><small>Earlier</small>Ada <span>1983</span></a>
+      <a class="hw-next" rel="next" href="cpp.html"><small>Later</small>C++ <span>1985</span></a>
+    </nav>
+
+    <footer>
+      <p><a href="../index.html#objc">See Obj-C in the family tree</a></p>
+    </footer>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script>
+  document.getElementById('themeToggle').addEventListener('click', function() {
+    var html = document.documentElement;
+    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('dp-theme', next);
+  });
+  </script>
+</body>
+</html>

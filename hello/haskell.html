@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello, World! in Haskell</title>
+  <meta name="description" content="Hello, World! in Haskell (1990), with its place in the family tree of programming languages.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="hello.css">
+  <script>
+    const saved = localStorage.getItem('dp-theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+    else if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+      document.documentElement.setAttribute('data-theme', 'dark');
+  </script>
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">Evolution of Programming</a>
+      <div class="nav-right">
+        <a href="../index.html#haskell" class="nav-link">Family tree</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="title-page hw-title">
+    <p class="edition">Hello, World!</p>
+    <h1>Haskell</h1>
+    <p class="subtitle">Haskell Committee</p>
+    <span class="language-badge hw-cat-functional">1990 &middot; Functional</span>
+  </header>
+
+  <main class="container">
+    <p class="hw-note">Pure functional, lazy evaluation</p>
+
+    <pre><code class="language-haskell">main :: IO ()
+main = putStrLn &quot;Hello, World!&quot;</code></pre>
+    <p class="hw-run">Runs as shown: checked 2026-10-31 with <code>ghc haskell.hs -o haskell &amp;&amp; ./haskell</code> in <code>haskell:9.10</code>.</p>
+
+    <p class="hw-edition">This is the core version: Hello, World! as you would write it in Haskell
+      today. A historical version, as it was first written, may follow.</p>
+
+    <section class="hw-lineage" aria-label="Lineage">
+      <div>
+        <h2>Descended from</h2>
+        <div class="hw-chips"><a class="hw-chip hw-cat-functional" href="ml.html">ML <span>1973</span></a><a class="hw-chip hw-cat-functional" href="scheme.html">Scheme <span>1975</span></a></div>
+      </div>
+      <div>
+        <h2>Influenced</h2>
+        <div class="hw-chips"><a class="hw-chip hw-cat-functional" href="scala.html">Scala <span>2003</span></a><a class="hw-chip hw-cat-systems" href="rust.html">Rust <span>2010</span></a></div>
+      </div>
+    </section>
+
+    <nav class="hw-pager" aria-label="Chronological">
+      <a class="hw-prev" rel="prev" href="perl.html"><small>Earlier</small>Perl <span>1987</span></a>
+      <a class="hw-next" rel="next" href="vb.html"><small>Later</small>VB <span>1991</span></a>
+    </nav>
+
+    <footer>
+      <p><a href="../index.html#haskell">See Haskell in the family tree</a></p>
+    </footer>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script>
+  document.getElementById('themeToggle').addEventListener('click', function() {
+    var html = document.documentElement;
+    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('dp-theme', next);
+  });
+  </script>
+</body>
+</html>

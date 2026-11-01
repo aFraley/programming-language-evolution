@@ -1,0 +1,303 @@
+{
+  "fortran": {
+    "ok": true,
+    "image": "gcc:14",
+    "command": "gfortran fortran.f90 -o fortran && ./fortran",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "lisp": {
+    "ok": true,
+    "image": "debian:bookworm + apt",
+    "command": "sbcl --script lisp.lisp",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "cobol": {
+    "ok": true,
+    "image": "debian:bookworm + apt",
+    "command": "cobc -x cobol.cob && ./cobol",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "algol": {
+    "ok": true,
+    "image": "debian:bookworm + GNU MARST 2.7 (built from source)",
+    "command": "marst algol.a60 -o algol.c && gcc algol.c -lalgol -lm -o algol && ./algol",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "basic": {
+    "ok": true,
+    "image": "debian:bookworm + apt",
+    "command": "bwbasic basic.bas",
+    "output": "Bywater BASIC Interpreter/Shell, version 2.20 patch level 2\n\nCopyright (c) 1993, Ted A. Campbell\n\nCopyright (c) 1995-1997, Jon B. Volkoff\n\n \nHello, World!\nbwBASIC:",
+    "checked": "2026-10-31"
+  },
+  "simula": {
+    "ok": true,
+    "image": "debian:bookworm + GNU Cim 5.1 (built from source)",
+    "command": "cim simula.sim && ./simula",
+    "output": "Compiling simula.sim:\ngcc -O2 -fcommon -std=gnu89 -Wno-implicit-function-declaration -Wno-int-conversion -c simula.c\nsimula.c: In function 'main':\nsimula.c:105:136: warning: incompatible implicit decl",
+    "checked": "2026-10-31"
+  },
+  "pascal": {
+    "ok": true,
+    "image": "debian:bookworm + apt",
+    "command": "fpc pascal.pas && ./pascal",
+    "output": "Free Pascal Compiler version 3.2.2+dfsg-20 [2023/03/30] for aarch64\nCopyright (c) 1993-2021 by Florian Klaempfl and others\nTarget OS: Linux for AArch64\nCompiling pascal.pas\nAssembling helloworld\nLinki",
+    "checked": "2026-10-31"
+  },
+  "c": {
+    "ok": true,
+    "image": "gcc:14",
+    "command": "gcc c.c -o c && ./c",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "smalltalk": {
+    "ok": true,
+    "image": "debian:bullseye + apt gnu-smalltalk",
+    "command": "gst smalltalk.st",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "prolog": {
+    "ok": true,
+    "image": "swipl:9.2.9",
+    "command": "swipl -g halt prolog.pro",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "ml": {
+    "ok": true,
+    "image": "debian:bookworm + apt",
+    "command": "poly --script ml.sml",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "sql": {
+    "ok": true,
+    "image": "debian:bookworm + apt",
+    "command": "sqlite3 :memory: < sql.sql",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "scheme": {
+    "ok": true,
+    "image": "debian:bookworm + apt",
+    "command": "guile scheme.scm",
+    "output": ";;; note: auto-compilation is enabled, set GUILE_AUTO_COMPILE=0\n;;;       or pass the --no-auto-compile argument to disable.\n;;; compiling /tmp/w/scheme.scm\n;;; compiled /root/.cache/guile/ccache/3.0-",
+    "checked": "2026-10-31"
+  },
+  "ada": {
+    "ok": true,
+    "image": "debian:bookworm + apt",
+    "command": "gnatmake hello.adb && ./hello",
+    "output": "aarch64-linux-gnu-gcc-12 -c hello.adb\naarch64-linux-gnu-gnatbind-12 -x hello.ali\naarch64-linux-gnu-gnatlink-12 hello.ali\nHello, World!",
+    "checked": "2026-10-31"
+  },
+  "objc": {
+    "ok": true,
+    "image": "debian:bookworm + apt",
+    "command": "clang objc.m -fobjc-runtime=gcc -I$(gcc -print-file-name=include) $(gnustep-config --objc-flags) $(gnustep-config --base-libs) -o objc && ./objc",
+    "output": "2026-11-01 01:07:52.174 objc[21:21] Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "cpp": {
+    "ok": true,
+    "image": "gcc:14",
+    "command": "g++ cpp.cpp -o cpp && ./cpp",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "erlang": {
+    "ok": true,
+    "image": "erlang:27",
+    "command": "erlc hello.erl && erl -noshell -s hello world -s init stop",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "perl": {
+    "ok": true,
+    "image": "perl:5.40",
+    "command": "perl perl.pl",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "haskell": {
+    "ok": true,
+    "image": "haskell:9.10",
+    "command": "ghc haskell.hs -o haskell && ./haskell",
+    "output": "[1 of 2] Compiling Main             ( haskell.hs, haskell.o )\n[2 of 2] Linking haskell\nHello, World!",
+    "checked": "2026-10-31"
+  },
+  "python": {
+    "ok": true,
+    "image": "python:3.13-slim",
+    "command": "python3 python.py",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "vb": {
+    "ok": true,
+    "image": "mcr.microsoft.com/dotnet/sdk:10.0",
+    "command": "dotnet new console -lang VB -o app && cp vb.vb app/Program.vb && dotnet run --project app",
+    "output": "The template \"Console App\" was created successfully.\n\nProcessing post-creation actions...\nRestoring /tmp/w/app/app.vbproj:\n  Determining projects to restore...\n  Restored /tmp/w/app/app.vbproj (in 71 ",
+    "checked": "2026-10-31"
+  },
+  "lua": {
+    "ok": true,
+    "image": "debian:bookworm + apt",
+    "command": "lua5.4 lua.lua",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "r": {
+    "ok": true,
+    "image": "r-base:4.4.2",
+    "command": "Rscript r.R",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "java": {
+    "ok": true,
+    "image": "eclipse-temurin:21",
+    "command": "javac Hello.java && java Hello",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "ruby": {
+    "ok": true,
+    "image": "ruby:3.3-slim",
+    "command": "ruby ruby.rb",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "javascript": {
+    "ok": true,
+    "image": "node:22",
+    "command": "node javascript.js",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "php": {
+    "ok": true,
+    "image": "php:8.3-cli",
+    "command": "php php.php",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "ocaml": {
+    "ok": true,
+    "image": "ocaml/opam:debian-12-ocaml-5.2",
+    "command": "ocaml ocaml.ml",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "csharp": {
+    "ok": true,
+    "image": "mcr.microsoft.com/dotnet/sdk:10.0",
+    "command": "dotnet run csharp.cs",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "d": {
+    "ok": true,
+    "image": "debian:bookworm + apt",
+    "command": "ldc2 d.d && ./d",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "groovy": {
+    "ok": true,
+    "image": "groovy:4.0-jdk21",
+    "command": "groovy groovy.groovy",
+    "output": "WARNING: Using incubator modules: jdk.incubator.vector\nHello, World!",
+    "checked": "2026-10-31"
+  },
+  "scala": {
+    "ok": true,
+    "image": "virtuslab/scala-cli:1.5.4",
+    "command": "scala-cli run --server=false scala.scala",
+    "output": "WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested\nChecking https://github.com/coursier/jvm-index/r",
+    "checked": "2026-10-31"
+  },
+  "fsharp": {
+    "ok": true,
+    "image": "mcr.microsoft.com/dotnet/sdk:10.0",
+    "command": "dotnet fsi fsharp.fsx",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "clojure": {
+    "ok": true,
+    "image": "clojure:temurin-21-tools-deps",
+    "command": "clojure -M clojure.clj",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "go": {
+    "ok": true,
+    "image": "golang:1.23",
+    "command": "go run go.go",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "rust": {
+    "ok": true,
+    "image": "rust:1.83",
+    "command": "rustc rust.rs && ./rust",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "kotlin": {
+    "ok": true,
+    "image": "eclipse-temurin:21 + kotlinc 2.1.0",
+    "command": "kotlinc kotlin.kt -include-runtime -d kotlin.jar && java -jar kotlin.jar",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "dart": {
+    "ok": true,
+    "image": "dart:3.5",
+    "command": "dart run dart.dart",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "elixir": {
+    "ok": true,
+    "image": "elixir:1.17",
+    "command": "elixir elixir.exs",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "typescript": {
+    "ok": true,
+    "image": "node:22",
+    "command": "npx -y tsx typescript.ts",
+    "output": "Hello, World!\nnpm notice\nnpm notice New major version of npm available! 10.9.9 -> 12.2.1\nnpm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1\nnpm notice To update run: npm install -g ",
+    "checked": "2026-10-31"
+  },
+  "julia": {
+    "ok": true,
+    "image": "julia:1.11",
+    "command": "julia julia.jl",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "swift": {
+    "ok": true,
+    "image": "swift:6.0",
+    "command": "swiftc swift.swift -o swift && ./swift",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  },
+  "zig": {
+    "ok": true,
+    "image": "debian:bookworm + zig 0.13.0 (ziglang.org tarball)",
+    "command": "zig run zig.zig",
+    "output": "Hello, World!",
+    "checked": "2026-10-31"
+  }
+}

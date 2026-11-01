@@ -1,0 +1,621 @@
+[
+  {
+    "id": "fortran",
+    "name": "Fortran",
+    "year": 1957,
+    "x": 100,
+    "cat": "systems",
+    "by": [],
+    "creator": "John Backus, IBM",
+    "note": "First high-level compiled language",
+    "prism": "fortran",
+    "file": "fortran.f90"
+  },
+  {
+    "id": "lisp",
+    "name": "Lisp",
+    "year": 1958,
+    "x": 700,
+    "cat": "functional",
+    "by": [],
+    "creator": "John McCarthy, MIT",
+    "note": "Garbage collection, recursion, homoiconicity",
+    "prism": "lisp",
+    "file": "lisp.lisp"
+  },
+  {
+    "id": "cobol",
+    "name": "COBOL",
+    "year": 1959,
+    "x": 420,
+    "cat": "other",
+    "by": [],
+    "creator": "Grace Hopper et al.",
+    "note": "English-like syntax for business",
+    "prism": "cobol",
+    "file": "cobol.cob"
+  },
+  {
+    "id": "algol",
+    "name": "ALGOL",
+    "year": 1960,
+    "x": 240,
+    "cat": "systems",
+    "by": [
+      "fortran"
+    ],
+    "creator": "International committee",
+    "note": "Influenced nearly every language after it",
+    "prism": "clike",
+    "file": "algol.a60",
+    "aside": "The ALGOL 60 report defined no input or output at all; every implementation supplied its own. This version uses <code>outstring</code>, as provided by GNU MARST, a modern ALGOL 60 translator."
+  },
+  {
+    "id": "basic",
+    "name": "BASIC",
+    "year": 1964,
+    "x": 420,
+    "cat": "scripting",
+    "by": [
+      "algol"
+    ],
+    "creator": "Kemeny & Kurtz",
+    "note": "Democratized access to computing",
+    "prism": "basic",
+    "file": "basic.bas"
+  },
+  {
+    "id": "simula",
+    "name": "Simula",
+    "year": 1967,
+    "x": 340,
+    "cat": "oop",
+    "by": [
+      "algol"
+    ],
+    "creator": "Dahl & Nygaard",
+    "note": "Invented classes and OOP",
+    "prism": "clike",
+    "file": "simula.sim"
+  },
+  {
+    "id": "pascal",
+    "name": "Pascal",
+    "year": 1970,
+    "x": 200,
+    "cat": "systems",
+    "by": [
+      "algol"
+    ],
+    "creator": "Niklaus Wirth",
+    "note": "Structured programming, CS education",
+    "prism": "pascal",
+    "file": "pascal.pas"
+  },
+  {
+    "id": "c",
+    "name": "C",
+    "year": 1972,
+    "x": 100,
+    "cat": "systems",
+    "by": [
+      "algol"
+    ],
+    "creator": "Dennis Ritchie",
+    "note": "Systems programming, built Unix",
+    "prism": "c",
+    "file": "c.c"
+  },
+  {
+    "id": "smalltalk",
+    "name": "Smalltalk",
+    "year": 1972,
+    "x": 420,
+    "cat": "oop",
+    "by": [
+      "simula",
+      "lisp"
+    ],
+    "creator": "Alan Kay, Xerox PARC",
+    "note": "Pure OOP, message passing, GUI",
+    "prism": "smalltalk",
+    "file": "smalltalk.st"
+  },
+  {
+    "id": "prolog",
+    "name": "Prolog",
+    "year": 1972,
+    "x": 800,
+    "cat": "other",
+    "by": [],
+    "creator": "Colmerauer & Roussel",
+    "note": "Logic programming, AI research",
+    "prism": "prolog",
+    "file": "prolog.pro"
+  },
+  {
+    "id": "ml",
+    "name": "ML",
+    "year": 1973,
+    "x": 620,
+    "cat": "functional",
+    "by": [
+      "lisp"
+    ],
+    "creator": "Robin Milner",
+    "note": "Type inference, pattern matching",
+    "prism": "sml",
+    "file": "ml.sml"
+  },
+  {
+    "id": "sql",
+    "name": "SQL",
+    "year": 1974,
+    "x": 800,
+    "cat": "other",
+    "by": [],
+    "creator": "Chamberlin & Boyce",
+    "note": "Declarative data querying",
+    "prism": "sql",
+    "file": "sql.sql"
+  },
+  {
+    "id": "scheme",
+    "name": "Scheme",
+    "year": 1975,
+    "x": 560,
+    "cat": "functional",
+    "by": [
+      "lisp"
+    ],
+    "creator": "Sussman & Steele",
+    "note": "Minimalist Lisp, lexical closures",
+    "prism": "scheme",
+    "file": "scheme.scm"
+  },
+  {
+    "id": "ada",
+    "name": "Ada",
+    "year": 1983,
+    "x": 260,
+    "cat": "systems",
+    "by": [
+      "pascal",
+      "simula"
+    ],
+    "creator": "Jean Ichbiah",
+    "note": "Safety-critical systems, tasking",
+    "prism": "ada",
+    "file": "ada.adb"
+  },
+  {
+    "id": "objc",
+    "name": "Obj-C",
+    "year": 1984,
+    "x": 420,
+    "cat": "oop",
+    "by": [
+      "c",
+      "smalltalk"
+    ],
+    "creator": "Brad Cox",
+    "note": "Smalltalk messaging meets C",
+    "prism": "objectivec",
+    "file": "objc.m"
+  },
+  {
+    "id": "cpp",
+    "name": "C++",
+    "year": 1985,
+    "x": 160,
+    "cat": "systems",
+    "by": [
+      "c",
+      "simula"
+    ],
+    "creator": "Bjarne Stroustrup",
+    "note": "C with classes, templates, RAII",
+    "prism": "cpp",
+    "file": "cpp.cpp"
+  },
+  {
+    "id": "erlang",
+    "name": "Erlang",
+    "year": 1986,
+    "x": 760,
+    "cat": "functional",
+    "by": [
+      "prolog"
+    ],
+    "creator": "Joe Armstrong",
+    "note": "Fault-tolerant concurrency",
+    "prism": "erlang",
+    "file": "erlang.erl"
+  },
+  {
+    "id": "perl",
+    "name": "Perl",
+    "year": 1987,
+    "x": 500,
+    "cat": "scripting",
+    "by": [
+      "c"
+    ],
+    "creator": "Larry Wall",
+    "note": "Text processing, regex",
+    "prism": "perl",
+    "file": "perl.pl"
+  },
+  {
+    "id": "haskell",
+    "name": "Haskell",
+    "year": 1990,
+    "x": 640,
+    "cat": "functional",
+    "by": [
+      "ml",
+      "scheme"
+    ],
+    "creator": "Haskell Committee",
+    "note": "Pure functional, lazy evaluation",
+    "prism": "haskell",
+    "file": "haskell.hs"
+  },
+  {
+    "id": "python",
+    "name": "Python",
+    "year": 1991,
+    "x": 460,
+    "cat": "scripting",
+    "by": [
+      "c",
+      "perl"
+    ],
+    "creator": "Guido van Rossum",
+    "note": "Readability, batteries included",
+    "prism": "python",
+    "file": "python.py"
+  },
+  {
+    "id": "vb",
+    "name": "VB",
+    "year": 1991,
+    "x": 340,
+    "cat": "scripting",
+    "by": [
+      "basic"
+    ],
+    "creator": "Microsoft",
+    "note": "Rapid application development",
+    "prism": "visual-basic",
+    "file": "vb.vb"
+  },
+  {
+    "id": "lua",
+    "name": "Lua",
+    "year": 1993,
+    "x": 560,
+    "cat": "scripting",
+    "by": [
+      "scheme"
+    ],
+    "creator": "PUC-Rio team",
+    "note": "Embeddable scripting, game engines",
+    "prism": "lua",
+    "file": "lua.lua"
+  },
+  {
+    "id": "r",
+    "name": "R",
+    "year": 1993,
+    "x": 780,
+    "cat": "scripting",
+    "by": [
+      "scheme"
+    ],
+    "creator": "Ihaka & Gentleman",
+    "note": "Statistical computing and graphics",
+    "prism": "r",
+    "file": "r.R"
+  },
+  {
+    "id": "java",
+    "name": "Java",
+    "year": 1995,
+    "x": 200,
+    "cat": "oop",
+    "by": [
+      "cpp",
+      "smalltalk"
+    ],
+    "creator": "James Gosling, Sun",
+    "note": "Write once, run anywhere",
+    "prism": "java",
+    "file": "java.java"
+  },
+  {
+    "id": "ruby",
+    "name": "Ruby",
+    "year": 1995,
+    "x": 540,
+    "cat": "scripting",
+    "by": [
+      "perl",
+      "smalltalk"
+    ],
+    "creator": "Yukihiro Matsumoto",
+    "note": "Optimized for happiness",
+    "prism": "ruby",
+    "file": "ruby.rb"
+  },
+  {
+    "id": "javascript",
+    "name": "JavaScript",
+    "year": 1995,
+    "x": 420,
+    "cat": "scripting",
+    "by": [
+      "scheme",
+      "java"
+    ],
+    "creator": "Brendan Eich",
+    "note": "The language of the web",
+    "prism": "javascript",
+    "file": "javascript.js"
+  },
+  {
+    "id": "php",
+    "name": "PHP",
+    "year": 1995,
+    "x": 330,
+    "cat": "scripting",
+    "by": [
+      "c",
+      "perl"
+    ],
+    "creator": "Rasmus Lerdorf",
+    "note": "Server-side web",
+    "prism": "php",
+    "file": "php.php"
+  },
+  {
+    "id": "ocaml",
+    "name": "OCaml",
+    "year": 1996,
+    "x": 680,
+    "cat": "functional",
+    "by": [
+      "ml"
+    ],
+    "creator": "INRIA",
+    "note": "ML family, pattern matching",
+    "prism": "ocaml",
+    "file": "ocaml.ml"
+  },
+  {
+    "id": "csharp",
+    "name": "C#",
+    "year": 2000,
+    "x": 260,
+    "cat": "oop",
+    "by": [
+      "java",
+      "cpp"
+    ],
+    "creator": "Anders Hejlsberg",
+    "note": "The .NET platform",
+    "prism": "csharp",
+    "file": "csharp.cs"
+  },
+  {
+    "id": "d",
+    "name": "D",
+    "year": 2001,
+    "x": 120,
+    "cat": "systems",
+    "by": [
+      "cpp"
+    ],
+    "creator": "Walter Bright",
+    "note": "A better C++",
+    "prism": "d",
+    "file": "d.d"
+  },
+  {
+    "id": "groovy",
+    "name": "Groovy",
+    "year": 2003,
+    "x": 420,
+    "cat": "scripting",
+    "by": [
+      "java",
+      "ruby"
+    ],
+    "creator": "James Strachan",
+    "note": "Dynamic JVM, Gradle",
+    "prism": "groovy",
+    "file": "groovy.groovy"
+  },
+  {
+    "id": "scala",
+    "name": "Scala",
+    "year": 2003,
+    "x": 580,
+    "cat": "functional",
+    "by": [
+      "java",
+      "haskell"
+    ],
+    "creator": "Martin Odersky",
+    "note": "OOP + functional on JVM",
+    "prism": "scala",
+    "file": "scala.scala"
+  },
+  {
+    "id": "fsharp",
+    "name": "F#",
+    "year": 2005,
+    "x": 680,
+    "cat": "functional",
+    "by": [
+      "ocaml",
+      "csharp"
+    ],
+    "creator": "Don Syme",
+    "note": "ML on .NET",
+    "prism": "fsharp",
+    "file": "fsharp.fsx"
+  },
+  {
+    "id": "clojure",
+    "name": "Clojure",
+    "year": 2007,
+    "x": 620,
+    "cat": "functional",
+    "by": [
+      "lisp",
+      "java"
+    ],
+    "creator": "Rich Hickey",
+    "note": "Modern Lisp, immutable data",
+    "prism": "clojure",
+    "file": "clojure.clj"
+  },
+  {
+    "id": "go",
+    "name": "Go",
+    "year": 2009,
+    "x": 120,
+    "cat": "systems",
+    "by": [
+      "c",
+      "pascal"
+    ],
+    "creator": "Pike, Thompson & Griesemer",
+    "note": "Simplicity, goroutines",
+    "prism": "go",
+    "file": "go.go"
+  },
+  {
+    "id": "rust",
+    "name": "Rust",
+    "year": 2010,
+    "x": 220,
+    "cat": "systems",
+    "by": [
+      "cpp",
+      "haskell",
+      "ocaml",
+      "erlang"
+    ],
+    "creator": "Graydon Hoare",
+    "note": "Memory safety without GC",
+    "prism": "rust",
+    "file": "rust.rs"
+  },
+  {
+    "id": "kotlin",
+    "name": "Kotlin",
+    "year": 2011,
+    "x": 320,
+    "cat": "oop",
+    "by": [
+      "java",
+      "scala"
+    ],
+    "creator": "JetBrains",
+    "note": "Modern Java alternative",
+    "prism": "kotlin",
+    "file": "kotlin.kt"
+  },
+  {
+    "id": "dart",
+    "name": "Dart",
+    "year": 2011,
+    "x": 430,
+    "cat": "oop",
+    "by": [
+      "java",
+      "javascript"
+    ],
+    "creator": "Google",
+    "note": "Flutter, null safety",
+    "prism": "dart",
+    "file": "dart.dart"
+  },
+  {
+    "id": "elixir",
+    "name": "Elixir",
+    "year": 2011,
+    "x": 760,
+    "cat": "functional",
+    "by": [
+      "erlang",
+      "ruby"
+    ],
+    "creator": "José Valim",
+    "note": "Erlang VM, Ruby syntax",
+    "prism": "elixir",
+    "file": "elixir.exs"
+  },
+  {
+    "id": "typescript",
+    "name": "TypeScript",
+    "year": 2012,
+    "x": 470,
+    "cat": "scripting",
+    "by": [
+      "javascript",
+      "csharp"
+    ],
+    "creator": "Anders Hejlsberg",
+    "note": "Typed superset of JS",
+    "prism": "typescript",
+    "file": "typescript.ts"
+  },
+  {
+    "id": "julia",
+    "name": "Julia",
+    "year": 2012,
+    "x": 640,
+    "cat": "functional",
+    "by": [
+      "python",
+      "lisp"
+    ],
+    "creator": "Bezanson et al.",
+    "note": "High-performance scientific",
+    "prism": "julia",
+    "file": "julia.jl"
+  },
+  {
+    "id": "swift",
+    "name": "Swift",
+    "year": 2014,
+    "x": 380,
+    "cat": "oop",
+    "by": [
+      "objc",
+      "rust"
+    ],
+    "creator": "Chris Lattner, Apple",
+    "note": "Safe, fast Apple platform",
+    "prism": "swift",
+    "file": "swift.swift"
+  },
+  {
+    "id": "zig",
+    "name": "Zig",
+    "year": 2016,
+    "x": 120,
+    "cat": "systems",
+    "by": [
+      "c",
+      "rust"
+    ],
+    "creator": "Andrew Kelley",
+    "note": "Simple systems, no hidden allocs",
+    "prism": "zig",
+    "file": "zig.zig"
+  }
+]

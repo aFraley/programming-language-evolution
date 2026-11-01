@@ -1,0 +1,4 @@
+begin
+    comment ALGOL 60 defined no input or output;
+    outstring(1, "Hello, World!\n")
+end
